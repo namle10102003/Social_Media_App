@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import "./register.scss"
 
 const Register = () => {
@@ -5,10 +6,12 @@ const Register = () => {
         <div className="register">
             <div className="card">
                 <div className="left">
-                    <h1>Lama Social.</h1>
+                    <h1>Uni Circle</h1>
                     <p>Welcome to my application</p>
                     <span>Do you have an account?</span>
-                    <button>Login</button>
+                    <Link to="/login">
+                        <button>Login</button>
+                    </Link>
                 </div>
                 <div className="right">
                     <h1>Register</h1>
