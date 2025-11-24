@@ -3,11 +3,10 @@
     position: sticky;
     top: 70px;
     height: calc(100vh - 70px);
-    overflow: scroll;
-
-    &::-webkit-scrollbar{
-        display: none;
-    }
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    box-sizing: border-box;
     
     .container {
         padding: 20px;
@@ -36,9 +35,14 @@
                 img {
                     width: 30px;
                     height: 30px;
+                    min-width: 30px;
+                    min-height: 30px;
+                    max-width: 30px;
+                    max-height: 30px;
                     border-radius: 50%;
                     object-fit: cover;
-
+                    display: block;
+                    flex: 0 0 30px;
                 }
 
                 span{
@@ -54,7 +58,14 @@
                 
                 img {
                     width: 30px;
-
+                    height: 30px;
+                    min-width: 30px;
+                    min-height: 30px;
+                    max-width: 30px;
+                    max-height: 30px;
+                    object-fit: cover;
+                    display: block;
+                    flex: 0 0 30px;
                 }
 
                 span{

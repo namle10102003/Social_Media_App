@@ -49,8 +49,14 @@
             img {
                 width: 30px;
                 height: 30px;
+                min-width: 30px;
+                min-height: 30px;
+                max-width: 30px;
+                max-height: 30px;
                 border-radius: 50%;
                 object-fit: cover;
+                display: block;
+                flex: 0 0 30px;
             }
 
             span{
