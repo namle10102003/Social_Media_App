@@ -10,6 +10,9 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 const NavBar = () => {
+
+    const { toggle } = useContext(DarkModeContext);
+
     return (
         <div className="navbar">
             <div className="left">
@@ -17,7 +20,7 @@ const NavBar = () => {
                     <span>UniCircle</span>
                 </Link>
                 <HomeOutlinedIcon />
-                <DarkModeOutlinedIcon />
+                <DarkModeOutlinedIcon onClick={toggle} />
                 <GridViewOutlinedIcon />
                 <div className="search">
                     <SearchOutlinedIcon />

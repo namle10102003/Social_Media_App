@@ -1,4 +1,7 @@
-.leftBar{
+@import "../../style.scss";
+
+.leftBar {
+  @include themify($themes) {
     flex: 2;
     position: sticky;
     top: 70px;
@@ -7,73 +10,73 @@
     overflow-x: hidden;
     width: 100%;
     box-sizing: border-box;
-    
+    background-color: themed("bg");
+    color: themed("textColor");
+
     .container {
-        padding: 20px;
+      padding: 20px;
 
-        hr{
-            margin: 20px 0px;
-            border: none;
-            height: 0.5px;
-            background-color: lightgrey;
+      hr {
+        margin: 20px 0px;
+        border: none;
+        height: 0.5px;
+        background-color: themed("border");
+      }
+
+      .menu {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        span {
+          font-size: 12px;
         }
 
-        .menu{
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        .user {
+          display: flex;
+          align-items: center;
+          gap: 10px;
 
-            span{
-                font-size: 12px;
-            }
+          img {
+            width: 30px;
+            height: 30px;
+            min-width: 30px;
+            min-height: 30px;
+            max-width: 30px;
+            max-height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            flex: 0 0 30px;
+          }
 
-            .user{
-                display: flex;
-                align-items: center;
-                gap: 10px;
-
-                img {
-                    width: 30px;
-                    height: 30px;
-                    min-width: 30px;
-                    min-height: 30px;
-                    max-width: 30px;
-                    max-height: 30px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                    display: block;
-                    flex: 0 0 30px;
-                }
-
-                span{
-                    font-size: 14px;
-
-                }
-            }
-
-            .item{
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                
-                img {
-                    width: 30px;
-                    height: 30px;
-                    min-width: 30px;
-                    min-height: 30px;
-                    max-width: 30px;
-                    max-height: 30px;
-                    object-fit: cover;
-                    display: block;
-                    flex: 0 0 30px;
-                }
-
-                span{
-                    font-size: 14px;
-                    
-                }
-
-            }
+          span {
+            font-size: 14px;
+          }
         }
+
+        .item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          img {
+            width: 30px;
+            height: 30px;
+            min-width: 30px;
+            min-height: 30px;
+            max-width: 30px;
+            max-height: 30px;
+            object-fit: cover;
+            display: block;
+            flex: 0 0 30px;
+          }
+
+          span {
+            font-size: 14px;
+          }
+        }
+      }
     }
+  }
 }
