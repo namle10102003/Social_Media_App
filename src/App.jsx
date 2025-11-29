@@ -14,10 +14,11 @@ import {
 } from "react-router-dom";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext.jsx";
+import { AuthContext } from "./context/authContext.jsx";
 
 function App() {
 
-  const currentUser = true;
+  const { currentUser } = useContext(AuthContext);
 
   const { darkMode } = useContext(DarkModeContext);
 
