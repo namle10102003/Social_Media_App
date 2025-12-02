@@ -1,35 +1,22 @@
-import "./posts.scss";
 import Post from "../post/Post";
-import { useContext } from "react";
-import { AuthContext } from "../../context/authContext.jsx";
+import "./posts.scss";
+import { useQuery } from "@tanstack/react-query";
+import { makeRequest } from "../../axios";
 
-const Posts = () => {
-    const { currentUser } = useContext(AuthContext);
-
-    const postsData = [
-        {
-            id: 1,
-            userId: 1,
-            name: currentUser?.name || "Laurent Garcia",
-            profilePic: currentUser?.profilePic || "https://images.pexels.com/photos/27690887/pexels-photo-27690887.jpeg",
-            desc: "This is a sample post",
-            img: "https://images.pexels.com/photos/27690887/pexels-photo-27690887.jpeg",
-        },
-        {
-            id: 2,
-            userId: 2,
-            name: currentUser?.name || "Laurent Garcia",
-            profilePic: currentUser?.profilePic || "https://images.pexels.com/photos/27690887/pexels-photo-27690887.jpeg",
-            desc: "This is a sample post",
-            img: "https://images.pexels.com/photos/27690887/pexels-photo-27690887.jpeg",
-        },
-    ];
+const Posts = ({ userId }) => {
+    const { isLoading, error, data } = useQuery({
+        queryKey: ["posts", userId],
+        queryFn: () =>
+            makeRequest.get("/posts" + (userId ? "?userId=" + userId : "")).then((res) => res.data),
+        enabled: true,
+        initialData: [],
+    });
 
     return (
         <div className="posts">
-            {postsData.map((p) => (
-                <Post key={p.id} post={p} />
-            ))}
+            {isLoading && <div>loading</div>}
+            {error && <div>Something went wrong!</div>}
+            {!isLoading && !error && (data?.length ? data.map((post) => <Post post={post} key={post.id} />) : <div>No posts</div>)}
         </div>
     );
 };
