@@ -10,6 +10,12 @@ import cors from "cors";
 // import multer from "multer";
 import cookieParser from "cookie-parser";
 
+// import path from "path";
+// import { fileURLToPath } from "url";
+
+// Serve uploaded static files from the /upload path (disabled to revert to previous behavior)
+// app.use("/upload", express.static(path.join(__dirname, "upload")));
+
 // Enable CORS and JSON parsing before routes so middleware applies to every route
 app.use(express.json());
 app.use(

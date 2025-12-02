@@ -14,6 +14,11 @@ const Post = ({ post }) => {
     //TEMPORARY
     const liked = false;
 
+    const resolvePic = (src) => {
+        if (!src) return null;
+        return src;
+    };
+
     return (
         <div className="post">
             <div className="container">
@@ -34,7 +39,7 @@ const Post = ({ post }) => {
                 </div>
                 <div className="content">
                     <p>{post.desc}</p>
-                    <img src={post.img} alt="" />
+                    {post.img && <img src={post.img} alt="" />}
                 </div>
                 <div className="info">
                     <div className="item">

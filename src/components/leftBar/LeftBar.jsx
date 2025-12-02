@@ -1,6 +1,4 @@
-import "./leftBar.scss"
-import { useContext } from "react";
-import { AuthContext } from "../../context/authContext.jsx";
+import "./leftBar.scss";
 import Friends from "../../assets/1.png";
 import Groups from "../../assets/2.png";
 import Market from "../../assets/3.png";
@@ -14,35 +12,45 @@ import Messages from "../../assets/10.png";
 import Tutorials from "../../assets/11.png";
 import Courses from "../../assets/12.png";
 import Fund from "../../assets/13.png";
+import { AuthContext } from "../../context/authContext";
+import { useContext } from "react";
 
 const LeftBar = () => {
+
     const { currentUser } = useContext(AuthContext);
+    const resolveProfilePic = (pic) => {
+        const fallback = "https://images.pexels.com/photos/27690887/pexels-photo-27690887.jpeg";
+        if (!pic) return fallback;
+        if (pic.startsWith("http") || pic.startsWith("/")) return pic;
+        return "/upload/" + pic;
+    };
+
     return (
         <div className="leftBar">
             <div className="container">
                 <div className="menu">
                     <div className="user">
-                        <img src={currentUser?.profilePic || "https://images.pexels.com/photos/27690887/pexels-photo-27690887.jpeg"} alt="avatar" />
-                        <span>{currentUser?.name || "Laurent Garcia"}</span>
+                        <img src={resolveProfilePic(currentUser?.profilePic)} alt="avatar" />
+                        <span>{currentUser.name}</span>
                     </div>
                     <div className="item">
-                        <img src={Friends} alt="Friends" />
+                        <img src={Friends} alt="" />
                         <span>Friends</span>
                     </div>
                     <div className="item">
-                        <img src={Groups} alt="Groups" />
+                        <img src={Groups} alt="" />
                         <span>Groups</span>
                     </div>
                     <div className="item">
-                        <img src={Market} alt="Marketplace" />
+                        <img src={Market} alt="" />
                         <span>Marketplace</span>
                     </div>
                     <div className="item">
-                        <img src={Watch} alt="Watch" />
+                        <img src={Watch} alt="" />
                         <span>Watch</span>
                     </div>
                     <div className="item">
-                        <img src={Memories} alt="Memories" />
+                        <img src={Memories} alt="" />
                         <span>Memories</span>
                     </div>
                 </div>
@@ -88,7 +96,7 @@ const LeftBar = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default LeftBar
+export default LeftBar;
