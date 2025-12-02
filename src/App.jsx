@@ -39,6 +39,12 @@ function App() {
     )
   }
 
+  const Index = () => {
+    const { currentUser } = useContext(AuthContext);
+    if (!currentUser) return <Navigate to="/login" />;
+    return <Home />;
+  }
+
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
       return <Navigate to="/login" />
@@ -57,7 +63,7 @@ function App() {
       children: [
         {
           path: "/",
-          element: <Home />,
+          element: <Index />,
         },
         {
           path: "/profile/:id",
