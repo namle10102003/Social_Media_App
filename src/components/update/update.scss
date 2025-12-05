@@ -16,9 +16,12 @@
     .wrapper {
       margin: auto;
       width: 40%;
+      max-height: 90vh;
       height: 70%;
       background-color: themed("bg");
       padding: 50px;
+      box-sizing: border-box;
+      overflow: hidden; // contain scrolling inside the form
       z-index: 999;
       display: flex;
       flex-direction: column;
@@ -45,6 +48,9 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+        flex: 1 1 auto;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
 
         .files {
           display: flex;
@@ -95,6 +101,11 @@
           cursor: pointer;
           color: white;
           background-color: #5271ff;
+          /* Make the primary action easily reachable: stick to bottom of visible area when scrolling */
+          position: sticky;
+          bottom: 0;
+          align-self: flex-start;
+          margin-top: 8px;
         }
       }
 

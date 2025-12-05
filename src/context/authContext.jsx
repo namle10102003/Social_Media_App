@@ -16,12 +16,23 @@ export const AuthContextProvider = ({ children }) => {
         setCurrentUser(res.data)
     };
 
+    const logout = async () => {
+        try {
+            await axios.post("http://localhost:8800/api/auth/logout", {}, { withCredentials: true });
+        } catch (err) {
+            // ignore server errors on logout, proceed to clear local state
+            console.warn("Logout request failed", err?.message || err);
+        }
+        setCurrentUser(null);
+        localStorage.removeItem("user");
+    };
+
     useEffect(() => {
         localStorage.setItem("user", JSON.stringify(currentUser));
     }, [currentUser]);
 
     return (
-        <AuthContext.Provider value={{ currentUser, login }}>
+        <AuthContext.Provider value={{ currentUser, login, logout, setCurrentUser }}>
             {children}
         </AuthContext.Provider>
     );
