@@ -7,14 +7,23 @@ import commentRoutes from "./routes/comments.js";
 import likeRoutes from "./routes/likes.js";
 // import relationshipRoutes from "./routes/relationships.js";
 import cors from "cors";
-// import multer from "multer";
+import multer from "multer";
 import cookieParser from "cookie-parser";
+import path from "path";
+import { fileURLToPath } from "url";
+import fs from "fs";
 
-// import path from "path";
-// import { fileURLToPath } from "url";
+// Resolve __dirname in ES modules and ensure upload folder exists inside the API folder
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const uploadDir = path.join(__dirname, "upload");
+// create upload dir if it doesn't exist to avoid multer errors
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
 
-// Serve uploaded static files from the /upload path (disabled to revert to previous behavior)
-// app.use("/upload", express.static(path.join(__dirname, "upload")));
+// Serve uploaded static files from the /upload path on the backend
+app.use("/upload", express.static(uploadDir));
 
 // Enable CORS and JSON parsing before routes so middleware applies to every route
 app.use(express.json());
@@ -25,6 +34,22 @@ app.use(
     })
 );
 app.use(cookieParser());
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, uploadDir);
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + file.originalname);
+    },
+});
+
+const upload = multer({ storage: storage });
+
+app.post("/api/upload", upload.single("file"), (req, res) => {
+    const file = req.file;
+    res.status(200).json(file.filename);
+});
 
 // Register routes
 app.use("/api/auth", authRoutes);
